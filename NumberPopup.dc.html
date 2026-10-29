@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="hi-Latn">
+<head>
+<meta charset="utf-8">
+<title>Number popup</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div role="dialog" aria-modal="true" aria-labelledby="np-title" tabIndex="-1" ref="{{setDialog}}" onKeyDown="{{onKey}}" style="position: relative; width: 100%; max-width: 400px; margin: 0 auto; box-sizing: border-box; border-radius: 24px; background: #FFFFFF; overflow: hidden; outline: none; font-family: 'Inter', system-ui, sans-serif; color: #06231A; box-shadow: 0 40px 80px -30px rgba(6, 35, 26, 0.55)">
+
+  <sc-if value="{{isForm}}" hint-placeholder-val="{{true}}">
+    <button type="button" aria-label="Band karo" onClick="{{close}}" style="position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #F3F6F5; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33453D" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <div style="padding: 20px 22px 16px; background: #FFFFFF; color: #06231A; border-bottom: 1px solid #E3F2EC">
+      <div style="display: flex; align-items: center; gap: 10px; padding-right: 44px">
+        <span style="display: flex">
+          <img src="assets/b9467914753afe954ddc17f77a538279.webp" alt="" width="96" height="96" style="display: block; width: 32px; height: 32px; border-radius: 999px; border: 2px solid #FFFFFF">
+          <img src="assets/dc1db5f323a1a7f48074225f7a5971b5.webp" alt="" width="96" height="96" style="display: block; width: 32px; height: 32px; margin-left: -9px; border-radius: 999px; border: 2px solid #FFFFFF">
+          <img src="assets/1ee67ab6dd55b7ad790aa17ed20e6b3f.webp" alt="" width="96" height="96" style="display: block; width: 32px; height: 32px; margin-left: -9px; border-radius: 999px; border: 2px solid #FFFFFF">
+        </span>
+        <span style="font-size: 12.5px; font-weight: 700; line-height: 1.35; color: #33453D"><span style="color: #E8B800" aria-hidden="true">★</span> 5.0 Google Play<br>18 video reviews</span>
+      </div>
+      <sc-if value="{{isTrial}}" hint-placeholder-val="{{true}}">
+        <h2 id="np-title" style="margin: 14px 0 0; font-weight: 800; font-size: 25px; line-height: 1.15; letter-spacing: -0.02em">7 din FREE trial: bas WhatsApp number daalo</h2>
+      </sc-if>
+      <sc-if value="{{isAuto}}" hint-placeholder-val="{{false}}">
+        <h2 id="np-title" style="margin: 14px 0 0; font-weight: 800; font-size: 25px; line-height: 1.15; letter-spacing: -0.02em">Jaane se pehle: free trial link WhatsApp pe le lo</h2>
+      </sc-if>
+      <p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; color: #4A5A53">Trial link aur setup ka 2 minute ka video aapke WhatsApp pe aayega.</p>
+    </div>
+
+    <form onSubmit="{{submit}}" noValidate="{{true}}" style="display: flex; flex-direction: column; gap: 12px; padding: 18px 22px 12px">
+      <label for="np-phone" style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px; font-weight: 700; color: #33453D"><span>WhatsApp number</span><span style="font-weight: 600; color: #4A5A53">10 digit</span></label>
+      <div style="display: flex; align-items: stretch; height: 52px; box-sizing: border-box; border-radius: 14px; border: 1.5px solid {{inputBorder}}; overflow: hidden; background: #FFFFFF">
+        <span style="flex: none; display: flex; align-items: center; padding: 0 12px; background: #F3F6F5; border-right: 1px solid #D5E0DB; font-size: 17px; font-weight: 700; color: #33453D">+91</span>
+        <input id="np-phone" ref="{{setInput}}" type="tel" inputMode="numeric" autoComplete="tel-national" placeholder="98765 43210" aria-describedby="np-note" aria-invalid="{{invalid}}" value="{{phone}}" onChange="{{onPhone}}" style="flex: 1 1 auto; min-width: 0; height: 100%; padding: 0 14px; box-sizing: border-box; border: 0; background: #FFFFFF; font: inherit; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; color: #06231A">
+      </div>
+      <sc-if value="{{hasError}}" hint-placeholder-val="{{false}}">
+        <p role="alert" style="margin: 0; padding: 10px 12px; border-radius: 10px; background: #FDECEC; font-size: 14px; font-weight: 600; color: #8F1D14">{{errorText}}</p>
+      </sc-if>
+      <button type="submit" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; border: 0; border-radius: 999px; background: #007A5C; color: #FFFFFF; font: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Trial link bhejo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+      <ul style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 0; padding: 0; list-style: none; font-size: 13px; font-weight: 700; color: #33453D">
+        <li style="display: inline-flex; align-items: center; gap: 5px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007A5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Card nahi chahiye</li>
+        <li style="display: inline-flex; align-items: center; gap: 5px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007A5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Free setup call</li>
+        <li style="display: inline-flex; align-items: center; gap: 5px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007A5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Official Meta API</li>
+      </ul>
+      <p id="np-note" style="margin: 0; font-size: 12.5px; line-height: 1.45; color: #4A5A53">Number dene par Instant Broadcast is trial aur setup ke liye aapko WhatsApp aur call karega. Band karwane ke liye STOP likhein. <a href="https://instantbroadcast.in/privacy-policy" style="color: #007A5C; font-weight: 700">Privacy policy</a></p>
+      <button type="button" onClick="{{close}}" style="align-self: center; min-height: 44px; padding: 0 8px; border: 0; background: none; font: inherit; font-size: 14.5px; font-weight: 700; color: #33453D; text-decoration: underline; text-underline-offset: 3px; cursor: pointer">Abhi nahi</button>
+    </form>
+    <a href="thank-you.html" ref="{{setThanks}}" tabIndex="-1" aria-hidden="true" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap">Thank-you page</a>
+  </sc-if>
+
+  <sc-if value="{{isSent}}" hint-placeholder-val="{{false}}">
+    <button type="button" aria-label="Band karo" onClick="{{close}}" style="position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #F3F6F5; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33453D" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 64px 24px 26px; text-align: center">
+      <span style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 999px; background: #E3F2EC"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#007A5C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+      <h2 id="np-title" style="margin: 0; font-weight: 800; font-size: 26px; line-height: 1.15; letter-spacing: -0.02em">Number mil gaya!</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33453D">+91 {{phoneLabel}} pe trial link bhej rahe hain.</p>
+      <a href="thank-you.html" style="align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 54px; margin-top: 6px; padding: 0 20px; box-sizing: border-box; border-radius: 999px; background: #007A5C; color: #FFFFFF; font-size: 16px; font-weight: 800; text-decoration: none">Aage badho</a>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"variant":{"editor":"enum","options":["trial","auto"],"default":"trial"},"onClose":{"editor":null},"$preview":{"width":400,"height":546}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 'form', phone: '', error: '' };
+  }
+  componentDidMount() {
+    // Inside the page's overlay: a visitor who tapped a button goes straight to the number field;
+    // an automatic popup only moves focus to the dialog, so no keyboard jumps up on a phone.
+    if (typeof this.props.onClose !== 'function') return;
+    const auto = (this.props.variant ?? 'trial') === 'auto';
+    const el = auto ? this.dialogEl : (this.inputEl || this.dialogEl);
+    if (el) { try { el.focus({ preventScroll: true }); } catch (err) {} }
+  }
+  renderVals() {
+    const s = this.state;
+    const auto = (this.props.variant ?? 'trial') === 'auto';
+    const close = () => {
+      if (typeof this.props.onClose === 'function') this.props.onClose();
+      else this.setState({ step: 'form', error: '' });
+    };
+    return {
+      isTrial: !auto,
+      isAuto: auto,
+      isForm: s.step === 'form',
+      isSent: s.step === 'sent',
+      phone: s.phone,
+      phoneLabel: s.phone.length === 10 ? s.phone.slice(0, 5) + ' ' + s.phone.slice(5) : s.phone,
+      hasError: !!s.error,
+      errorText: s.error,
+      invalid: s.error ? 'true' : 'false',
+      inputBorder: s.error ? '#B42318' : '#B7C8C0',
+      setDialog: (el) => { this.dialogEl = el; },
+      setInput: (el) => { this.inputEl = el; },
+      setThanks: (el) => { this.thanksEl = el; },
+      onKey: (e) => { if (e && e.key === 'Escape') close(); },
+      onPhone: (e) => {
+        let d = String(e.target.value || '').replace(/\D/g, '');
+        if (d.length > 10 && d.startsWith('91')) d = d.slice(2);
+        if (d.length > 10 && d.startsWith('0')) d = d.slice(1);
+        this.setState({ phone: d.slice(0, 10), error: '' });
+      },
+      submit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (!/^[6-9]\d{9}$/.test(s.phone)) {
+          this.setState({ error: 'Sahi 10 digit ka mobile number likho.' });
+          if (this.inputEl) { try { this.inputEl.focus(); } catch (err) {} }
+          return;
+        }
+        const phone = s.phone;
+        const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+        try {
+          sessionStorage.setItem('ib_lead_phone', phone);
+          sessionStorage.setItem('ib_lead_event_id', eventId);
+        } catch (err) {}
+        // Same leads endpoint the main instantbroadcast.in site posts to (CORS open) — lands in the
+        // same CRM/leads inbox. Fire-and-forget so a slow/blocked request never stalls the redirect.
+        try {
+          fetch('https://instantbroadcast.in/api/leads/special-offer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              phone: phone,
+              name: 'Lead (' + phone + ')',
+              email: '',
+              source: 'ctwa_landing_v3',
+              couponCode: ''
+            })
+          }).catch(() => {});
+        } catch (err) {}
+        // Meta Pixel Lead fires on the thank-you page (once per eventId), not here — avoids double counting
+        // if a visitor lands back on this popup state after a redirect.
+        try { if (window.ibFireLeadBeacon) window.ibFireLeadBeacon('ctwa_landing_v3'); } catch (err) {}
+        if (this.thanksEl) this.thanksEl.click();
+        this.setState({ step: 'sent', error: '' });
+      },
+      close
+    };
+  }
+}
+</script>
+</body>
+</html>

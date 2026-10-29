@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="hi-Latn">
+<head>
+<meta charset="utf-8">
+<title>Story reel: Rajesh bhai ki kahani</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 100%; max-width: 360px; margin: 0 auto; font-family: 'Inter', system-ui, sans-serif; color: #06231A">
+  <div ref="{{setRoot}}" role="region" aria-roledescription="story" aria-label="Rajesh bhai ki kahani, 6 scenes" style="position: relative; border-radius: 30px; border: 8px solid #E1E7E4; background: #FFFFFF; overflow: hidden; box-shadow: 0 30px 60px -36px rgba(6, 35, 26, 0.45)">
+    <div style="display: flex; gap: 4px; padding: 10px 12px 6px">
+      <sc-for list="{{bars}}" as="b" hint-placeholder-count="6">
+        <span style="flex: 1 1 0; height: 4px; border-radius: 2px; background: #DCE6E1; overflow: hidden"><span style="display: block; height: 4px; width: {{b.w}}; background: #00A67E; transition: {{b.tr}}"></span></span>
+      </sc-for>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; padding: 2px 8px 8px 12px">
+      <img src="assets/2adfe7cfecad2a271fe6ef46ba3e79cf.svg" alt="" width="96" height="96" style="display: block; flex: none; width: 30px; height: 30px">
+      <span style="flex: 1 1 auto; min-width: 0; font-size: 13.5px; font-weight: 800; line-height: 1.2">Rajesh bhai ki kahani<span style="display: block; font-size: 11.5px; font-weight: 600; color: #4A5A53">Saree ki dukaan · Surat</span></span>
+      <sc-if value="{{playing}}" hint-placeholder-val="{{true}}">
+        <button type="button" onClick="{{toggle}}" aria-label="Kahani roko" style="flex: none; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #F3F6F5; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="#33453D"></rect><rect x="14" y="5" width="4" height="14" rx="1.5" fill="#33453D"></rect></svg></button>
+      </sc-if>
+      <sc-if value="{{paused}}" hint-placeholder-val="{{false}}">
+        <button type="button" onClick="{{toggle}}" aria-label="Kahani chalao" style="flex: none; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #E3F2EC; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#007A5C"></path></svg></button>
+      </sc-if>
+    </div>
+    <div style="position: relative; aspect-ratio: 600 / 520; background: #F7F9F8">
+      <img src="assets/1d2587c61cf98532d41393412341ec83.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op0}}; transition: opacity 0.5s ease">
+      <img src="assets/78c2f35f65fab3aa32c1dafc458cff83.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op1}}; transition: opacity 0.5s ease">
+      <img src="assets/2fa2acd24614f30cf88e62d633c5b1a9.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op2}}; transition: opacity 0.5s ease">
+      <img src="assets/5152df72296547c4b9c79ac98bb44702.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op3}}; transition: opacity 0.5s ease">
+      <img src="assets/30db78721cd70dca0bbe04e1645bd6f3.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op4}}; transition: opacity 0.5s ease">
+      <img src="assets/e7f5770fd943f20ae076f6acddf1cd30.svg" alt="" width="600" height="520" style="position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: {{op5}}; transition: opacity 0.5s ease">
+      <sc-for list="{{overlays}}" as="o" hint-placeholder-count="3">
+        <span aria-hidden="true" style="position: absolute; left: {{o.left}}; top: {{o.top}}; max-width: 64%; padding: 5px 9px; box-sizing: border-box; border-radius: 10px; background: {{o.bg}}; border: 1px solid {{o.bd}}; color: {{o.fg}}; font-size: 12px; font-weight: 700; line-height: 1.25; white-space: nowrap; box-shadow: 0 8px 16px -10px rgba(6, 35, 26, 0.45); opacity: {{ovOp}}; transform: translateY({{ovY}}); transition: opacity 0.35s ease, transform 0.35s ease; pointer-events: none">{{o.t}}</span>
+      </sc-for>
+      <button type="button" aria-label="Pichla scene" onClick="{{prev}}" style="position: absolute; left: 0; top: 0; bottom: 0; width: 35%; border: 0; background: transparent; cursor: pointer"></button>
+      <button type="button" aria-label="Agla scene" onClick="{{next}}" style="position: absolute; right: 0; top: 0; bottom: 0; width: 65%; border: 0; background: transparent; cursor: pointer"></button>
+    </div>
+    <div aria-live="polite" style="min-height: 170px; padding: 14px 16px 16px; box-sizing: border-box">
+      <sc-if value="{{isGood}}" hint-placeholder-val="{{false}}">
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #E3F2EC; color: #00664D; font-size: 12px; font-weight: 800"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00664D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{{tag}}</span>
+      </sc-if>
+      <sc-if value="{{isBad}}" hint-placeholder-val="{{true}}">
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #FDECEC; color: #8F1D14; font-size: 12px; font-weight: 800"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8F1D14" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>{{tag}}</span>
+      </sc-if>
+      <p style="margin: 8px 0 0; font-size: 18px; font-weight: 800; line-height: 1.25">{{title}}</p>
+      <p style="margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: #4A5A53">{{text}}</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"autoplay":{"editor":"boolean","default":true},"startScene":{"editor":"int","min":0,"max":5,"default":0},"$preview":{"width":360,"height":558}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const s = Number(this.props.startScene ?? 0) || 0;
+    this.state = { i: Math.max(0, Math.min(5, s)), phase: 1, playing: false };
+    this.wantPlay = false;
+  }
+  componentDidMount() {
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (err) {}
+    if ((this.props.autoplay ?? true) && !reduce) this.play();
+    // Only run while at least a quarter of the reel is on screen.
+    if (typeof IntersectionObserver === 'function' && this.rootEl) {
+      this.io = new IntersectionObserver((entries) => {
+        const seen = !!(entries[0] && entries[0].isIntersecting);
+        if (!this.wantPlay) return;
+        if (seen) this.show(this.state.i); else this.clear();
+      }, { threshold: 0.25 });
+      this.io.observe(this.rootEl);
+    }
+  }
+  componentWillUnmount() {
+    this.clear();
+    if (this.io) this.io.disconnect();
+  }
+  clear() {
+    clearTimeout(this.t1);
+    clearTimeout(this.t2);
+  }
+  show(i) {
+    this.clear();
+    const k = ((i % 6) + 6) % 6;
+    this.setState({ i: k, phase: 0 });
+    this.t1 = setTimeout(() => this.setState({ phase: 1 }), 450);
+    if (this.wantPlay) this.t2 = setTimeout(() => this.show(k + 1), 4600);
+  }
+  play() {
+    this.wantPlay = true;
+    this.setState({ playing: true });
+    this.show(this.state.i);
+  }
+  pause() {
+    this.wantPlay = false;
+    this.clear();
+    this.setState({ playing: false, phase: 1 });
+  }
+  renderVals() {
+    const s = this.state;
+    // Copy for each scene. Overlay positions are % of the picture (600 x 520).
+    const scenes = [
+      { good: false, tag: 'Abhi aap ye kar rahe ho', title: 'Boost kiya, likes aaye… order nahi', text: '₹5,000 ka boost, 1,240 likes. Par ek bhi customer ka number nahi mila.',
+        ov: [{ x: 4, y: 4, t: 'Boost ₹5,000', k: 'chip' }, { x: 60, y: 3, t: '1,240 likes', k: 'heart' }, { x: 70, y: 52, t: 'Order: 0', k: 'bad' }] },
+      { good: false, tag: 'Abhi aap ye kar rahe ho', title: 'Lead form: number fake ya galat', text: 'Auto-fill se form bhar diya. Call karo toh not reachable, galat number, ya “maine form nahi bhara”.',
+        ov: [{ x: 66, y: 3, t: 'Not reachable', k: 'bad' }, { x: 64, y: 15, t: 'Galat number', k: 'bad' }, { x: 40, y: 80, t: '“Maine form nahi bhara!”', k: 'in' }] },
+      { good: false, tag: 'Abhi aap ye kar rahe ho', title: 'Raat ki enquiry, subah ka reply', text: 'Customer ne raat 11:48 pe price poocha. Reply subah gaya, tab tak woh kahin aur se le chuki thi.',
+        ov: [{ x: 50, y: 46, t: 'Price kya hai? · 11:48 PM', k: 'in' }, { x: 4, y: 80, t: 'Subah: “Le liya kahin aur se”', k: 'bad' }] },
+      { good: true, tag: 'Ye karo', title: 'Ad pe ek tap, seedha WhatsApp chat', text: 'Aap apna ad chalao, button rakho “Send WhatsApp Message”. Customer khud message karta hai.',
+        ov: [{ x: 3, y: 4, t: 'Hi! Mujhe yeh offer chahiye', k: 'out' }, { x: 50, y: 66, t: 'Send WhatsApp Message', k: 'cta' }, { x: 4, y: 84, t: 'Number apne aap save', k: 'good' }] },
+      { good: true, tag: 'Ye karo', title: 'Aap so rahe ho, chatbot jawab de raha hai', text: 'Instant Broadcast ka chatbot price list bhejta hai, budget poochta hai, lead tag karta hai.',
+        ov: [{ x: 58, y: 3, t: 'Price kya hai?', k: 'in' }, { x: 40, y: 15, t: 'Yeh rahi price list! Budget?', k: 'bot' }, { x: 4, y: 84, t: 'Raat 11:48 · turant jawab', k: 'good' }] },
+      { good: true, tag: 'Instant Broadcast ke saath', title: 'Subah: asli leads, pakke orders', text: 'Har lead ka asli WhatsApp number, Hot/Cold tag ke saath. Team bas follow-up karke order confirm karti hai.',
+        ov: [{ x: 3, y: 4, t: '12 nayi leads · sab asli number', k: 'good' }, { x: 66, y: 58, t: '3 order confirm', k: 'good' }] }
+    ];
+    const look = {
+      chip: ['#FFFFFF', '#DCE6E1', '#06231A'],
+      heart: ['#FFFFFF', '#F5C2C0', '#B42318'],
+      bad: ['#FDECEC', '#F5C2C0', '#8F1D14'],
+      good: ['#E3F2EC', '#B7E0CD', '#00664D'],
+      in: ['#FFFFFF', '#DCE6E1', '#06231A'],
+      out: ['#D9FDD3', '#BCEFB4', '#06231A'],
+      bot: ['#FFFFFF', '#00A67E', '#06231A'],
+      cta: ['#F0F2F5', '#00A67E', '#06231A']
+    };
+    const cur = scenes[s.i];
+    const playing = !!s.playing;
+    return {
+      setRoot: (el) => { this.rootEl = el; },
+      bars: scenes.map((_, j) => ({
+        w: j < s.i ? '100%' : j > s.i ? '0%' : (!playing || s.phase === 1 ? '100%' : '0%'),
+        tr: j === s.i && playing && s.phase === 1 ? 'width 4.1s linear' : 'none'
+      })),
+      op0: s.i === 0 ? 1 : 0, op1: s.i === 1 ? 1 : 0, op2: s.i === 2 ? 1 : 0,
+      op3: s.i === 3 ? 1 : 0, op4: s.i === 4 ? 1 : 0, op5: s.i === 5 ? 1 : 0,
+      overlays: cur.ov.map((o) => ({ left: o.x + '%', top: o.y + '%', t: o.t, bg: look[o.k][0], bd: look[o.k][1], fg: look[o.k][2] })),
+      ovOp: s.phase === 1 ? 1 : 0,
+      ovY: s.phase === 1 ? '0px' : '8px',
+      isGood: cur.good,
+      isBad: !cur.good,
+      tag: cur.tag,
+      title: cur.title,
+      text: cur.text,
+      playing: playing,
+      paused: !playing,
+      toggle: () => (this.wantPlay ? this.pause() : this.play()),
+      prev: () => this.show(s.i - 1),
+      next: () => this.show(s.i + 1)
+    };
+  }
+}
+</script>
+</body>
+</html>
